@@ -18,6 +18,15 @@ int combin(int n,int r)
 		return (combin(n-1,r-1)+combin(n-1,r));
 	}
 }
+int NewSumOfDigits(int ar[],int var)
+{
+	int sum=0;
+	for(int i=0;i<var;i++)
+	{
+		sum+=ar[i];
+	}
+	return sum;
+}
 int sumOFdigits(int numbr)
 {
 	int sum=0;
@@ -31,11 +40,12 @@ int sumOFdigits(int numbr)
 }
 int main()
 {
-	int var,cnst,bit=0;
+	int var,cnst,bit=0,num=0,counter=0;
 	cout<<"Enter the Constant : ";
 	cin>>cnst;
 	cout<<"Enter the number of variable positions : ";
 	cin>>var;
+	int ar[var]={0};
 	long long lrgstNo=pow(10,var)-1;
 	int number=0;
 	cout<<"Total number of combinations that can be formed are : ";
@@ -44,15 +54,49 @@ int main()
 	cout<<"\n\nYour required combinations are : \n\n";
 	for(int i=1;i<=lrgstNo;i++)
 	{
-		int rcvNo=sumOFdigits(i);
-		if(rcvNo==cnst)
+		num=i;
+		while(num!=0)
 		{
-			cout<<i;
-			if(bit<ans)
+			num=num/10;
+			counter++;
+		}
+		if(counter!=var)
+		{
+			num=i;
+			for(int j=var-1;j>=0;j--)
 			{
-				cout<<",";
+				ar[j]=num%10;
+				num=num/10;
 			}
-			bit++;
+			int rcvNewno=NewSumOfDigits(ar,var);
+			if(rcvNewno==cnst)
+			{
+				++bit;
+				for(int j=0;j<var;j++)
+				{
+					cout<<ar[j];
+				}
+				cout<<"\n";
+			}
+			counter=0;
+			ar[var]={0};
+		}
+		else
+		{
+			int rcvNo=sumOFdigits(i);
+			if(rcvNo==cnst)
+			{
+				cout<<i;
+				++bit;
+				if(bit<ans)
+				{
+					cout<<"\n";
+				}
+			}
+			if(bit==ans)
+			{
+				break;
+			}
 		}
 	}
 	cout<<"\n\nThese are your total "<<bit<<" combination of number whose sum of digits is "<<cnst<<"      :)\n\n";
