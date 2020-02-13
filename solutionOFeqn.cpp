@@ -76,8 +76,10 @@ int main()
 				{
 					cout<<ar[j];
 				}
+				cout<<"          "<<bit<<" solution";
 				cout<<"\n";
 			}
+			
 			counter=0;
 			ar[var]={0};
 		}
@@ -88,6 +90,7 @@ int main()
 			{
 				cout<<i;
 				++bit;
+				cout<<"          "<<bit<<" solution";
 				if(bit<ans)
 				{
 					cout<<"\n";
